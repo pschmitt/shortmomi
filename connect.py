@@ -29,7 +29,9 @@ def connect(host, username, password, port=443, verify=False, debug=False):
     Connect to a vCenter via the API
     :param host: Hostname or IP of the vCenter
     :type host: str or unicode
-    :param user: Username
+    :param username: Username
+    :type user: str or unicode
+    :param password: Password
     :type user: str or unicode
     :param port: Port on which the vCenter API is running (default: 443)
     :type port: int
