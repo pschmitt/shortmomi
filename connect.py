@@ -24,7 +24,7 @@ class ConnectionError(Exception):
     pass
 
 
-def connect(host, username=None, password=None, port=443, verify=False, debug=False):
+def connect(host, username, password, port=443, verify=False, debug=False):
     '''
     Connect to a vCenter via the API
     :param host: Hostname or IP of the vCenter
