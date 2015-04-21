@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='pyvmomi-lib',
-    version='1.1',
+    version='1.2',
     description='Retrieve the credentials for connecting to various ICT equipement',
     author='Philipp Schmitt',
     author_email='philipp.schmitt@post.lu',

@@ -20,7 +20,7 @@ import traceback
 '''
 Custom exception that is be thrown when the connection to a vCenter failed
 '''
-class ConnectionError(Exception):
+class ConnectionError(RuntimeError):
     pass
 
 
@@ -61,7 +61,7 @@ def connect(host, username, password, port=443, verify=False, debug=False):
             pass
         if not si:
             print('Connection could not be established', file=sys.stderr)
-            raise ConnectionError()
+            raise ConnectionError('Connection could not be established')
 
         # Register auto disconnect
         atexit.register(Disconnect, si)
