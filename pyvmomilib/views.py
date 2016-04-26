@@ -61,16 +61,22 @@ def get_hosts_in_datacenter(content, datacenter):
     return get_all(content, datacenter, vim.HostSystem)
 
 
-def get_datacenter(content, host):
+def get_vms_in_datacenter(content, datacenter):
     '''
-    Get the datacenter to whom a host belongs
+    Get all vms belonging to a given datacenter
+    '''
+    return get_all(content, datacenter, vim.VirtualMachine)
+
+
+def get_datacenter(content, obj):
+    '''
+    Get the datacenter to whom an object belongs
     '''
     datacenters = content.rootFolder.childEntity
     for d in datacenters:
-        dch = get_hosts_in_datacenter(content, d)
-        if dch is not None and host in dch:
+        dch = get_all(content, d, type(obj))
+        if dch is not None and obj in dch:
             return d
-
 
 def print_vm_info(vm):
     '''
