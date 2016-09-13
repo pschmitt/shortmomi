@@ -78,6 +78,14 @@ def get_datacenter(content, obj):
         if dch is not None and obj in dch:
             return d
 
+
+def get_all_dvswitches(content):
+    '''
+    Get all the distributed switches
+    '''
+    return get_all(content, content.rootFolder, vim.DistributedVirtualSwitch)
+
+
 def print_vm_info(vm):
     '''
     Print information for a particular virtual machine

@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='pyvmomi-lib',
-    version='1.3',
+    version='1.4',
     description='Bundle of useful functions for pyVmomi',
     author='Philipp Schmitt',
     author_email='philipp.schmitt@post.lu',
