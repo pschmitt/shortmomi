@@ -95,6 +95,18 @@ def get_all_dport_groups(content):
     )
 
 
+def get_all_vswitches(content):
+    '''
+    Get all the virtual switches
+    '''
+    vswitches = []
+    hosts = get_all_hosts(content)
+    for h in hosts:
+        for s in h.config.network.vswitch:
+            vswitches.append(s)
+    return vswitches
+
+
 def print_vm_info(vm):
     '''
     Print information for a particular virtual machine
