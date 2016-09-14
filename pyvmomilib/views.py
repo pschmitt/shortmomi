@@ -86,6 +86,15 @@ def get_all_dvswitches(content):
     return get_all(content, content.rootFolder, vim.DistributedVirtualSwitch)
 
 
+def get_all_dport_groups(content):
+    '''
+    Get all the distributed port groups
+    '''
+    return get_all(
+        content, content.rootFolder, vim.dvs.DistributedVirtualPortgroup
+    )
+
+
 def print_vm_info(vm):
     '''
     Print information for a particular virtual machine
