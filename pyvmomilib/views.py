@@ -7,9 +7,10 @@ Author: Philipp Schmitt <philipp.schmitt@post.lu>
 
 from __future__ import print_function
 from pyVmomi import vim
+import re
 
 
-def get_object_by_name(content, object_type, name):
+def get_object_by_name(content, object_type, name, regex=False):
     '''
     Get the vsphere object associated with a given text name
     Source: https://github.com/rreubenur/vmware-pyvmomi-examples/blob/master/create_template.py
@@ -18,15 +19,18 @@ def get_object_by_name(content, object_type, name):
         content.rootFolder, [object_type], True
     )
     for c in container.view:
-        if c.name == name:
+        if regex:
+            if re.match(name, c.name):
+                return c
+        elif c.name == name:
             return c
 
 
-def get_vm_by_name(content, name):
+def get_vm_by_name(content, name, regex=False):
     '''
     Get a VM by its name
     '''
-    return get_object_by_name(content, vim.VirtualMachine, name)
+    return get_object_by_name(content, vim.VirtualMachine, name, regex)
 
 
 def get_all(content, container, object_type):
