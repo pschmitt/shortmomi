@@ -9,6 +9,26 @@ from __future__ import print_function
 from pyVmomi import vim
 
 
+def get_object_by_name(content, object_type, name):
+    '''
+    Get the vsphere object associated with a given text name
+    Source: https://github.com/rreubenur/vmware-pyvmomi-examples/blob/master/create_template.py
+    '''
+    container = content.viewManager.CreateContainerView(
+        content.rootFolder, [object_type], True
+    )
+    for c in container.view:
+        if c.name == name:
+            return c
+
+
+def get_vm_by_name(content, name):
+    '''
+    Get a VM by its name
+    '''
+    return get_object_by_name(content, vim.VirtualMachine, name)
+
+
 def get_all(content, container, object_type):
     '''
     Get all items of a certain type
