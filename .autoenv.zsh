@@ -1,0 +1,1 @@
+workon pyvmomi-lib

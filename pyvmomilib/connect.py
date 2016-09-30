@@ -42,32 +42,29 @@ def connect(host, username, password, port=443, verify=False, debug=False):
     :return: Content
     :rtype: vim.ServiceInstanceContent
     '''
-
+    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
     if not verify:
         # Disable warnings about unsigned certificates
-        ssl._create_default_https_context = ssl._create_unverified_context
+        context.verify_mode = ssl.CERT_NONE
         requests.packages.urllib3.disable_warnings()
 
     try:
-        si = None
-        try:
-            si = SmartConnect(
-                host=host,
-                user=username,
-                pwd=password,
-                port=port
-            )
-        except IOError as e:
-            pass
-        if not si:
-            print('Connection could not be established', file=sys.stderr)
-            raise ConnectionError('Connection could not be established')
-
+        si = SmartConnect(
+            host=host,
+            user=username,
+            pwd=password,
+            port=port,
+            sslContext=context
+        )
         # Register auto disconnect
         atexit.register(Disconnect, si)
         # Return content
         return si.RetrieveContent()
+    except IOError as e:
+        print('I/O error({0}): {1}'.format(e.errno, e.strerror))
     except vmodl.MethodFault as e:
+        print('Connection could not be established', file=sys.stderr)
+        raise ConnectionError('Connection could not be established')
         print('Caught vmodl fault: ', e.msg, file=sys.stderr)
         if debug:
             traceback.print_exc()
