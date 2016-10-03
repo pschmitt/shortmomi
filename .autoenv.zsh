@@ -1,1 +1,1 @@
-workon pyvmomi-lib
+workon shortmomi
