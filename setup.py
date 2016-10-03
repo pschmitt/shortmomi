@@ -1,12 +1,12 @@
 from distutils.core import setup
 
 setup(
-    name='pyvmomi-lib',
-    version='1.6.0',
-    description='Bundle of useful functions for pyVmomi',
+    name='shortmomi',
+    version='1.6.1',
+    description='Bundle of useful functions and shortcuts for pyVmomi',
     author='Philipp Schmitt',
-    author_email='philipp.schmitt@post.lu',
-    url='https://git.3s.dt.ept.lu/ict-infra/pyvmomi-lib',
-    packages=['pyvmomilib'],
+    author_email='philipp@schmitt.co',
+    url='https://github.com/pschmitt/shortmomi',
+    packages=['shortmomi'],
     install_requires=['pyvmomi']
 )
