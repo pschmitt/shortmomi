@@ -42,7 +42,7 @@ def connect(host, username, password, port=443, verify=False, debug=False):
     :return: Content
     :rtype: vim.ServiceInstanceContent
     '''
-    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
+    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
     if not verify:
         # Disable warnings about unsigned certificates
         context.verify_mode = ssl.CERT_NONE
