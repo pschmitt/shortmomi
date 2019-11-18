@@ -2,13 +2,13 @@ from setuptools import find_packages, setup
 
 
 setup(
-    name='shortmomi',
-    version='1.7.0',
-    license='GPL3',
-    description='Bundle of useful functions and shortcuts for pyVmomi',
-    author='Philipp Schmitt',
-    author_email='philipp@schmitt.co',
-    url='https://github.com/pschmitt/shortmomi',
+    name="shortmomi",
+    version="1.7.1",
+    license="GPL3",
+    description="Bundle of useful functions and shortcuts for pyVmomi",
+    author="Philipp Schmitt",
+    author_email="philipp@schmitt.co",
+    url="https://github.com/pschmitt/shortmomi",
     packages=find_packages(),
-    install_requires=['pyvmomi']
+    install_requires=["pyvmomi"],
 )
