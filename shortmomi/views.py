@@ -33,6 +33,27 @@ def get_vm_by_name(content, name, regex=False):
     return get_object_by_name(content, vim.VirtualMachine, name, regex)
 
 
+def get_vm_by_ip(content, ip, multiple=False):
+    '''
+    Get a VM by its IP address
+    '''
+    matches = []
+    for vm in get_all_vms(content):
+        for ipconfig in [x.ipConfig.ipAddress for x in vm.guest.net \
+                if hasattr(x.ipConfig, 'ipAddress')]:
+            for c in ipconfig:
+                if c.ipAddress == ip:
+                    matches.append(vm)
+                    if not multiple:
+                        break
+    if len(matches) == 0:
+        return
+    elif len(matches) == 1:
+        return matches[0]
+    else:
+        return matches
+
+
 def get_all(content, container, object_type):
     '''
     Get all items of a certain type
