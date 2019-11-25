@@ -127,3 +127,23 @@ def find_vms_by_custom_field(content, name, value):
             if field.name == name and cfield.value == value:
                 matching.append(vm)
     return matching
+
+
+def get_obj_field_value(content, obj, name):
+    """
+    Get the value of the named field for a given object
+    :param content: Service Content
+    :type content: vim.ServiceContent
+    :param name: Name of the annotation/custom field (not the integer key)
+    :type name: str or unicode
+    :return: The value of the field
+    :rtype: str or NoneType
+    """
+    field = get_field_by_name(content, name)
+    if not field:
+        # Named field does not exist
+        return
+    fld_key = field.key
+    for fld in obj.customValue:
+        if fld_key == fld.key:
+            return fld.value
