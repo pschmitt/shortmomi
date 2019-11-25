@@ -4,6 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+ipython = "*"
+# black = "*"
+flake8 = "*"
+black = "*"
 
 [packages]
 requests = ">=2.20"
@@ -12,3 +16,6 @@ pyvmomi = ">=6.7.3"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
