@@ -1,4 +1,4 @@
-from .views import get_all_clusters
+from .views import (get_all_clusters, get_vm_by_name)
 from pyVmomi import vim
 from pyVim.task import WaitForTask
 
@@ -35,6 +35,17 @@ def get_affinity_rules(cluster, search_criteria):
 
 
 def get_affinity_rules_affecting(content, vm):
+    """
+    Get a list of rules affecting a VM
+    :param content: VMware API content
+    :type content: pyVmomi.VmomiSupport.vim.ServiceInstanceContent
+    :param vm: Name of the VM (or the API object)
+    :type vm: str or pyVmomi.VmomiSupport.vim.VirtualMachine
+    :return: A list of dicts holding the cluster and the rules affecting the VM
+    :rtype: list
+    """
+    if isinstance(vm, str):
+        vm = get_vm_by_name(content, vm)
     rules = []
     for cl in get_all_clusters(content):
         for rule in cl.configuration.rule:
