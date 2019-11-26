@@ -76,6 +76,9 @@ def delete_affinity_rule(cluster, rule):
     Delete an affinity rule
     """
     rules = get_affinity_rules(cluster, rule)
+    if not rules:
+        # Nothing to do
+        return
 
     spec = vim.cluster.ConfigSpecEx()
     spec.rulesSpec = []
