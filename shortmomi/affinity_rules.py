@@ -27,7 +27,7 @@ def get_affinity_rules(cluster, search_criteria):
     for rule in cluster.configuration.rule:
         # Keys are unique
         if rule.key == search_criteria:
-            return rule
+            return [rule]
         # Names are not
         if rule.name == search_criteria:
             rules.append(rule)
