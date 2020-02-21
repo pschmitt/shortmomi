@@ -99,6 +99,13 @@ def get_all_clusters(content):
     return get_all(content, content.rootFolder, vim.ClusterComputeResource)
 
 
+def get_all_resource_pools(content):
+    '''
+    Get all resource pools on a vCenter
+    '''
+    return get_all(content, content.rootFolder, vim.ResourcePool)
+
+
 def get_all_hosts(content):
     '''
     Get all clusters on a vCenter
