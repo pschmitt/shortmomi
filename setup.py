@@ -12,6 +12,6 @@ setup(
     packages=find_packages(),
     install_requires=[
         "pyvmomi",
-        "vsphere-automation-sdk-python @ git+https://github.com/vmware/vsphere-automation-sdk-python",
+        # "vsphere-automation-sdk-python @ git+https://github.com/vmware/vsphere-automation-sdk-python",
     ],
 )
