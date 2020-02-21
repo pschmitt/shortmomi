@@ -2,14 +2,14 @@
 
 import requests
 
-import com.vmware.cis.tagging_client as tagclient
-from com.vmware.vapi.std_client import DynamicID
 
 
 def get_tag_by_name(stub, tag_name):
     """
     Get a TagModel bbyy its name
     """
+    import com.vmware.cis.tagging_client as tagclient
+
     tag_svc = tagclient.Tag(stub)
     all_tag_ids = tag_svc.list()
     for tag_id in all_tag_ids:
@@ -22,6 +22,9 @@ def tag_vm(stub, vm, tag):
     """
     Tag a VM
     """
+    import com.vmware.cis.tagging_client as tagclient
+    from com.vmware.vapi.std_client import DynamicID
+
     if isinstance(tag, tagclient.TagModel):
         tag_id = tag.id
     else:

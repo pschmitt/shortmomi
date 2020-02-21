@@ -18,12 +18,6 @@ from pyVim.connect import Disconnect
 from pyVim.connect import SmartConnect
 from pyVmomi import vmodl
 
-from com.vmware.cis_client import Session
-from vmware.vapi.lib.connect import get_requests_connector
-from vmware.vapi.security.session import create_session_security_context
-from vmware.vapi.security.user_password import create_user_password_security_context
-from vmware.vapi.stdlib.client.factories import StubConfigurationFactory
-
 
 '''
 Custom exception that is be thrown when the connection to a vCenter failed
@@ -86,6 +80,12 @@ def stub_connect(host, username, password, verify=False):
     """
     Connect to the vCenter using the REST API
     """
+    from com.vmware.cis_client import Session
+    from vmware.vapi.lib.connect import get_requests_connector
+    from vmware.vapi.security.session import create_session_security_context
+    from vmware.vapi.security.user_password import create_user_password_security_context
+    from vmware.vapi.stdlib.client.factories import StubConfigurationFactory
+
     url = "https://{}/api".format(host)
 
     session = requests.Session()
