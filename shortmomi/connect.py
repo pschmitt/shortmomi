@@ -7,14 +7,22 @@ Author: Philipp Schmitt <philipp.schmitt@post.lu>
 
 
 from __future__ import print_function
-from pyVim.connect import Disconnect
-from pyVim.connect import SmartConnect
-from pyVmomi import vmodl
+
 import atexit
 import requests
 import ssl
 import sys
 import traceback
+
+from pyVim.connect import Disconnect
+from pyVim.connect import SmartConnect
+from pyVmomi import vmodl
+
+from com.vmware.cis_client import Session
+from vmware.vapi.lib.connect import get_requests_connector
+from vmware.vapi.security.session import create_session_security_context
+from vmware.vapi.security.user_password import create_user_password_security_context
+from vmware.vapi.stdlib.client.factories import StubConfigurationFactory
 
 
 '''
@@ -72,3 +80,28 @@ def connect(host, username, password, port=443, verify=False, debug=False):
         print('Caught exception:', str(e), file=sys.stderr)
         if debug:
             traceback.print_exc()
+
+
+def stub_connect(host, username, password, verify=False):
+    """
+    Connect to the vCenter using the REST API
+    """
+    url = "https://{}/api".format(host)
+
+    session = requests.Session()
+    session.verify = verify
+
+    connector = get_requests_connector(session=session, url=url)
+    stub_config = StubConfigurationFactory.new_std_configuration(connector)
+
+    # Pass user credentials (user/password) in the security context to authenticate.
+    # login to vAPI endpoint
+    user_password_security_context = create_user_password_security_context(username,
+                                                                           password)
+    stub_config.connector.set_security_context(user_password_security_context)
+    session_svc = Session(stub_config)
+    session_id = session_svc.create()
+    session_security_context = create_session_security_context(session_id)
+    stub_config.connector.set_security_context(session_security_context)
+
+    return stub_config
