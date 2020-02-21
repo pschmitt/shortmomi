@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="shortmomi",
-    version="1.9.2",
+    version="1.10.0",
     license="GPL3",
     description="Bundle of useful functions and shortcuts for pyVmomi",
     author="Philipp Schmitt",
