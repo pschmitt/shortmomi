@@ -85,6 +85,13 @@ def get_all_datastores(content):
     return get_all(content, content.rootFolder, vim.Datastore)
 
 
+def get_datastore_by_name(content, name, regex=False):
+    '''
+    Get a datastore by its name
+    '''
+    return get_object_by_name(content, vim.Datastore, name, regex)
+
+
 def get_all_clusters(content):
     '''
     Get all hosts on a vCenter
@@ -131,13 +138,23 @@ def get_all_dvswitches(content):
     return get_all(content, content.rootFolder, vim.DistributedVirtualSwitch)
 
 
-def get_all_dport_groups(content):
+def get_all_dvport_groups(content):
     '''
     Get all the distributed port groups
     '''
     return get_all(
         content, content.rootFolder, vim.dvs.DistributedVirtualPortgroup
     )
+
+
+def get_dvpg_by_name(content, name):
+    '''
+    Get a distributed port group by its name
+    '''
+    dportgroups = get_all_dvport_groups(content)
+    for dpg in dportgroups:
+        if dpg.name == name:
+            return dpg
 
 
 def get_all_vswitches(content):
@@ -150,6 +167,13 @@ def get_all_vswitches(content):
         for s in h.config.network.vswitch:
             vswitches.append(s)
     return vswitches
+
+
+def get_all_folders(content):
+    '''
+    Get all folders
+    '''
+    return get_all(content, content.rootFolder, vim.Folder)
 
 
 def print_vm_info(vm):
