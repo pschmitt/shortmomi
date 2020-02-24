@@ -6,5 +6,6 @@ from .custom_attributes import *
 from .datastores import *
 from .tasks import *
 from .tags import *
+from .utils import *
 from .views import *
 from .vm import *
