@@ -1,3 +1,6 @@
+from pyVmomi import vim
+
+
 # https://github.com/Akasurde/ansible-reproducers/blob/master/790/get_all_vms.py
 def get_folder_path(obj):
     paths = []
